@@ -12,7 +12,7 @@ const { cors } = require('./middleware/cors');
 
 const PORT = 80;
 
-mongoose.connect('mongodb://localhost:27017/newdbinsta', {
+mongoose.connect('mongodb://127.0.0.1:27017/newdbinsta', {
   useNewUrlParser: true,
   autoIndex: true,
 });

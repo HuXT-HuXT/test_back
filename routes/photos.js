@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { upload } = require('../middleware/multer');
 const { celebrate, Joi } = require('celebrate');
 
 const {
@@ -13,12 +14,8 @@ const {
 } = require('../controllers/photos');
 
 
-router.post('/upload', celebrate({
-  body: Joi.object().keys({
-    label: Joi.string().required().min(3).max(20),
-    description: Joi.string().min(5).max(50),
-  })
-}), addPhoto);
+router.post('/upload', upload.single(), addPhoto);
+
 router.get('/photos/:photoID', getPhoto);
 
 router.get('/photos/', getAllPhotos);

@@ -13,9 +13,7 @@ const addPhoto = (req, res, next) => {
     label,
     description,
   } = req.body;
-
-  /* Get link from multer */
-  const link = 'multer';
+  const link = req.file.path;
 
   Photo.create({
     label,
@@ -75,7 +73,7 @@ const updateDescription = (req, res, next) => {
         return Promise.reject(new NotFound(`Photo with id: ${photoID} not found.`));
       }
       if (photo.owner.toString() !== userId) {
-        return Promise.reject(new Unauthorized('Not allowed.'))
+        return Promise.reject(new Forbidden('Not allowed.'))
       }
       return Photo.findByIdAndUpdate(
         photo,
@@ -147,7 +145,7 @@ const updateComment = (req, res, next) => {
       }
       const commentToUpdate = photo.comments.filter(comment => comment.owner.toString() === userId && comment._id.toString() === commentId);
       if (!commentToUpdate.length) {
-        return Promise.reject(new Unauthorized('Not allowed!'));
+        return Promise.reject(new Forbidden('Not allowed!'));
       }
       return Photo.findOneAndUpdate({
         'comments._id': commentId,
@@ -200,7 +198,7 @@ const removeComment = (req, res, next) => {
   const { photoID } = req.params;
 
   if (userRole !== 'admin') {
-    next(new Unauthorized('Insufficient rights.'))
+    next(new Forbidden('Insufficient rights.'))
   }
   Photo.findByIdAndUpdate(
     photoID,

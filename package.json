@@ -1,7 +1,6 @@
 {
   "name": "test_back",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,5 +22,14 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HuXT-HuXT/test_back.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HuXT-HuXT/test_back/issues"
+  },
+  "homepage": "https://github.com/HuXT-HuXT/test_back#readme",
+  "description": ""
 }
